@@ -1,0 +1,58 @@
+﻿@{
+    ViewData["Title"] = "Group List";
+}
+@model IEnumerable<SPOJ.Models.Group>
+
+@if (User.IsInRole("teacher"))
+{
+    <a class="navbar-brand" asp-area="" asp-controller="Group" asp-action="CreateNewGroup"> New group </a>
+    <br />
+}
+@if (User.IsInRole("student"))
+{
+    <a class="navbar-brand" asp-area="" asp-controller="Group" asp-action="AllGroupList"> Apply in a new group </a>
+    <br />
+}
+<div class="row">
+    <div class="mx-auto">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Num.</th>
+                    <th scope="col">Name</th>
+                    @if (User.IsInRole("student"))
+                    {
+                        <th scope="col">Creator</th>
+                    }
+                    
+                </tr>
+            </thead>
+            <tbody>
+
+                @{int i = 0; }
+                @foreach (var group in Model)
+                {
+                    i = i + 1;
+                    <tr>
+                        <th scope="row">@i</th>
+                        <td>@group.GroupName</td>
+                        @*<td>@task.program_language</td>*@
+                        
+                        @if (User.IsInRole("teacher"))
+                        {
+                            <td><a class="btn btn-sm btn-primary" asp-action="ApplicationList" asp-route-GroupId="@group.GroupId">Applications</a></td>
+                            <td><a class="btn btn-sm btn-primary" asp-action="InGroupStudentsList" asp-route-GroupId="@group.GroupId">Student List</a></td>
+                            @* <td><a class="btn btn-sm btn-primary" asp-action="StudentMarks" asp-route-TaskId="@group.GroupId">Student marks</a></td> *@
+                        }
+                        @if (User.IsInRole("student"))
+                        {
+                            <td>@group.Creator</td>
+                            
+                        }
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>

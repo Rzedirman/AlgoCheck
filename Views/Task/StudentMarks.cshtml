@@ -1,0 +1,54 @@
+﻿
+
+
+
+<h2 class="col-md-offset-3 col-md-6 mx-auto">Marks for task: @ViewBag.taskName</h2>
+<h2 style="color: white;">.</h2>
+
+<form style="margin-bottom: 10px;" class="col-md-offset-3 col-md-6 mx-auto" asp-action="StudentMarks" method="post">
+    <input type="hidden" name="TaskId" value="@ViewBag.TaskId" />
+    <div class="row">
+        
+        
+        
+        <label for="regex">Filtr by group:</label>
+        <input type="text" name="regex">
+        
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</form>
+
+
+<div class="row">
+    <div class="mx-auto">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Student</th>
+                    <th scope="col">Language</th>
+                    <th scope="col">Group name</th>
+                    <th scope="col">Mark</th>
+                    
+                    
+                </tr>
+            </thead>
+            <tbody>
+
+                @{int i = 0; }
+                @foreach (var stud in ViewBag.students)
+                {
+                    i = i + 1;
+                    <tr>
+                        <td>@ViewBag.students[i-1]</td>
+                        <td>@ViewBag.languages[i-1]</td>
+                        <td>@ViewBag.groups[i-1]</td>
+                        <td>@ViewBag.marks[i-1]</td>
+                        
+                        <td><a class="btn btn-sm btn-primary" asp-action="ShowAnswer" asp-route-answContent="@ViewBag.answs[i-1]" asp-route-student="@ViewBag.students[i-1]" asp-route-language="@ViewBag.languages[i-1]" asp-route-group="@ViewBag.groups[i-1]" asp-route-taskName="@ViewBag.taskName">Show answer</a></td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>

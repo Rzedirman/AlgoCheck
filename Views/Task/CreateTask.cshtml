@@ -1,0 +1,65 @@
+﻿
+
+
+
+<h2>New task creating</h2>
+<form method="post" asp-controller="Task" asp-action="CreateTask">
+
+    <div class="form-group">
+        <label for="_taskName">Task name</label>
+        <input name="_taskName" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label for="_task_content">Task</label>
+        <textarea name="_task_content" class="form-control"></textarea>
+    </div>
+   
+
+    <div class="form-group">
+        <p class="btn btn-primary" id="setBtn">Add new test</p>
+        <p class="btn btn-primary" id="clearBtn">Clear tests</p>
+    </div>
+
+    <div class="form-group row" id="testsList">
+
+        
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+<script>
+    var testCount = document.getElementById("testCount");
+    var testsList = document.getElementById("testsList");
+    const setbt = document.getElementById("setBtn");
+    const clearbt = document.getElementById("clearBtn");
+
+    var n = 0;
+    testsList.innerHTML = "";
+
+    setbt.addEventListener('click', (e) => {
+        e.preventDefault();
+        n = n + 1;
+        var ih = testsList.innerHTML;
+        testsList.innerHTML = ih + `<div class="form-group col-md-2 col-lg-2">` +
+                                        `<label for="weights">Weight` + n + `</label>` +
+                                        `<textarea name="weights" class="form-control"></textarea>` +
+                                    `</div>` +
+                                    `<div class="form-group col-md-5 col-lg-5">` +
+                                        `<label for="testContents">Test` + n +`</label>`+
+                                        `<textarea name="testContents" class="form-control"></textarea>` +
+                                    `</div>` +
+                                    `<div class="form-group col-md-5 col-lg-5">` +
+                                        `<label for="testResults">Test result` + n + `</label>` +
+                                        `<textarea name="testResults" class="form-control"></textarea>` +
+                                    `</div>`;
+
+    });
+    clearbt.addEventListener('click', (e) => {
+        e.preventDefault();
+        n = 0;
+        testsList.innerHTML="";
+        
+
+    });
+
+</script>

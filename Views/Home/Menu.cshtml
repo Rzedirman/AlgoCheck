@@ -1,0 +1,17 @@
+﻿<div class="col-md-offset-9 col-md-3 mx-auto">
+
+@if (User.IsInRole("admin"))
+{
+    <a class="navbar-brand" asp-area="" asp-controller="Account" asp-action="Register">Create new user</a>
+    <br />
+    <a class="navbar-brand" asp-area="" asp-controller="Roles" asp-action="Index">Manage user roles</a>
+}
+@if (User.IsInRole("student")|| User.IsInRole("teacher"))
+{
+    
+    <a class="navbar-brand" asp-area="" asp-controller="Task" asp-action="Task_list">Task list</a>
+    <br/>
+    <a class="navbar-brand" asp-area="" asp-controller="Group" asp-action="GroupList">Group list</a>
+    
+}
+</div>

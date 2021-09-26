@@ -1,0 +1,87 @@
+﻿@using System.Linq;
+@using System.Collections.Generic;
+
+
+
+<div class="row">
+    <div class="mx-auto">
+        <table style="margin-bottom: 10px;" class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">First Token</th>
+                    <th scope="col">Second Token</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>
+
+                    
+                
+            @{
+                int i = 0; bool flaga = false; }
+            @foreach (var fp in ViewBag.firstToken)
+            {
+                i = i + 1;
+                foreach (var el in ViewBag.part1_Array)
+                {
+                    if (el == Convert.ToString(i))
+                    {
+                        flaga = true;
+                    }
+                }
+                if (flaga)
+                {
+                    <p style="color:red;display:inline;">@fp</p>
+                    flaga = false;
+                }
+                else
+                {
+                    <p style="display:inline;">@fp</p>
+                }
+            }
+            </td>
+            <td>
+            @{
+                i = 0; }
+            @foreach (var fp in ViewBag.secondToken)
+            {
+                i = i + 1;
+                foreach (var el in ViewBag.part2_Array)
+                {
+                    if (el == Convert.ToString(i))
+                    {
+                        flaga = true;
+                    }
+                }
+                if (flaga)
+                {
+                    <p style="color:red; display:inline;">@fp</p>
+                    flaga = false;
+                }
+                else
+                {
+                    <p style="display:inline;">@fp</p>
+                }
+            }
+            </td>
+            </tr>
+            </tbody>
+        </table>
+
+
+    </div>
+    <div class="col form-group">
+            <label for="answer1">Answer 1</label>
+            <textarea name="answer1" class="form-control">@ViewBag.firstAContent</textarea>
+
+        </div>
+
+
+        <div class="col form-group">
+            <label for="answer2">Answer 2</label>
+            <textarea name="answer2" class="form-control">@ViewBag.secondAContent</textarea>
+
+        </div>
+</div>

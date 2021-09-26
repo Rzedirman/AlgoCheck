@@ -1,0 +1,65 @@
+﻿
+@model IEnumerable<SPOJ.ViewModels.TaskPlagiatViewModel>
+
+<div class="row">
+    <div class="mx-auto">
+<form style="margin-bottom: 10px;" asp-action="TaskPlagiatList" method="post">
+    <input type="hidden" name="taskId" value="@ViewBag.taskid" />
+    <div class="row">
+        <input type="checkbox" name="sort" value="true"/> <p style="margin-right: 10px;">Sort by:</p>
+        
+        <select style="margin-right: 10px;" name="SortBy" asp-items="ViewBag.sortBy"></select>
+        
+        <input type="checkbox" name="direction" value="Ascending"/> <p style="margin-right: 10px;">Ascending</p>
+        
+        <button type="submit" class="btn btn-primary">Apply</button>
+    </div>
+</form>
+    </div>
+</div>
+
+<div class="row">
+    <div class="mx-auto">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Language</th>
+                    <th scope="col">First name</th>
+                    <th scope="col">Last name</th>
+                    <th scope="col">Group</th>
+                    <th scope="col">Version</th>
+                    <th scope="col">/</th>
+                    <th scope="col">First name</th>
+                    <th scope="col">Last name</th>
+                    <th scope="col">Group</th>
+                    <th scope="col">Version</th>
+                    <th scope="col">Result</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+
+                @{int i = 0; }
+                @foreach (var plagiat in Model)
+                {
+                    i = i + 1;
+                    <tr>
+                        <td>@plagiat.language</td>
+                        <td>@plagiat.FirstName1</td>
+                        <td>@plagiat.LastName1</td>
+                        <td>@ViewBag.gName1[i-1]</td>
+                        <td>@plagiat.Version1</td>
+                        <td>/</td>
+                        <td>@plagiat.FirstName2</td>
+                        <td>@plagiat.LastName2</td>
+                        <td>@ViewBag.gName2[i-1]</td>
+                        <td>@plagiat.Version2</td>
+                        <td>@plagiat.Plagiatresult</td>
+                        <td><a class="btn btn-sm btn-primary" asp-action="PlagiatDetails" asp-route-firstAID="@plagiat.FirstAnswerId" asp-route-secondAID="@plagiat.SecondAnswerId" asp-route-sameParts="@plagiat.Plagiat_sameParts">Details</a></td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>

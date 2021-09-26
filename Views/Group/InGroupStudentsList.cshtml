@@ -1,0 +1,35 @@
+﻿@{
+    ViewData["Title"] = "User List";
+}
+@model IEnumerable<SPOJ.Models.User>
+
+<H3 style="padding-left: 50px;" class="col-md-offset-3 col-md-6 mx-auto">List of users in group @ViewBag.GroupName</H3>
+
+<div class="row">
+    <div class="mx-auto">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Num.</th>
+                    <th scope="col">First name</th>
+                    <th scope="col">Last name</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @{int i = 0; }
+                @foreach (var user in Model)
+                {
+                    i = i + 1;
+                    <tr>
+                        <th scope="row">@i</th>
+                        <td>@user.firstName</td>
+                        <td>@user.lastName</td>
+                        <td><a class="btn btn-sm btn-primary" asp-controller="Group" asp-action="DeleteUserFromGroup" asp-route-GroupId="@ViewBag.GroupId" asp-route-userId="@user.Id">Delete</a></td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>

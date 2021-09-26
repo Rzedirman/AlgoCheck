@@ -1,0 +1,65 @@
+﻿@{
+    ViewData["Title"] = "Task List";
+}
+@model IEnumerable<SPOJ.Models.Task>
+
+@if (User.IsInRole("teacher"))
+{
+    <a class="navbar-brand" asp-area="" asp-controller="Task" asp-action="CreateTask"> New task </a>
+    <br />
+}
+<div class="row">
+    <div class="mx-auto">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Num.</th>
+                    <th scope="col">Teacher Login</th>
+                    <th scope="col">Task name</th>
+                    <th scope="col">Teacher Firstname</th>
+                    <th scope="col">Teacher Lastname</th>
+                    @if (User.IsInRole("student"))
+                    {
+                        <th scope="col">Program Language</th>
+                        <th scope="col">Group name</th>
+                        <th scope="col">Mark</th>
+                    }
+                    
+                </tr>
+            </thead>
+            <tbody>
+
+                @{int i = 0; }
+                @foreach (var task in Model)
+                {
+                    i = i + 1;
+                    <tr>
+                        <th scope="row">@i</th>
+                        <td>@task.teacher_login</td>
+                        <td>@task.taskName</td>
+                        <td>@task.teacher_firstName</td>
+                        <td>@task.teacher_lastName</td>
+                    
+                    
+                        @if (User.IsInRole("teacher"))
+                        {
+                            <td><a class="btn btn-sm btn-primary" asp-action="AddUsersToTask" asp-route-TaskId="@task.TaskId">Share task</a></td>
+                            <td><a class="btn btn-sm btn-primary" asp-action="StudentMarks" asp-route-TaskId="@task.TaskId">Student marks</a></td>
+                            <td><a class="btn btn-sm btn-primary" asp-controller="Plagiat" asp-action="TaskPlagiatList" asp-route-TaskId="@task.TaskId">Antiplagiat</a></td>
+                            
+                            @* <td><a class="btn btn-sm btn-primary" asp-action="" asp-route-TaskId="@task.TaskId">Delete</a></td> *@
+                        }
+                        @if (User.IsInRole("student"))
+                        {
+                            <td>@ViewBag.bag[i-1].program_language</td>
+                            <td>@ViewBag.bag[i-1].Group.GroupName</td>
+                            <td>@ViewBag.oceny[i-1]</td>
+                            <td><a class="btn btn-sm btn-primary" asp-action="AddAnswersToTask" asp-route-TaskId="@task.TaskId" asp-route-groupId="@ViewBag.bag[i-1].GroupId" asp-route-language="@ViewBag.bag[i-1].program_language">Answer</a></td>
+                        }
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>

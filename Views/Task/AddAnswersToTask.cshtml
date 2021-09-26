@@ -1,0 +1,18 @@
+﻿
+
+<h2>Answer for task: @ViewBag.task.taskName</h2>
+@* <h6>@ViewBag.task.task_content</h6> *@
+
+<textarea class="form-control" readonly>@ViewBag.task.task_content</textarea>
+<form method="post" asp-controller="Task" asp-action="AddAnswersToTask">
+
+    <input type="hidden" name="taskId" value="@ViewBag.task.TaskId" />
+    <input type="hidden" name="groupId" value="@ViewBag.groupId" />
+    <input type="hidden" name="language" value="@ViewBag.language" />
+    <div class="form-group">
+        <label for="answer">Answer</label>
+        <textarea name="answer" class="form-control"></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>

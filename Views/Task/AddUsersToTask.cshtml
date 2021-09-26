@@ -1,0 +1,25 @@
+﻿
+@using Microsoft.AspNetCore.Identity
+@using SPOJ.Models
+@model SPOJ.ViewModels.ShareTaskToGroupViewModel
+
+<h3>Add groups to task @Model.task.taskName</h3>
+
+<form asp-action="AddUsersToTask" method="post">
+    <input type="hidden" name="taskId" value="@Model.task.TaskId" />
+    <div>
+        <label ></label>
+        <select name="language" asp-items="ViewBag.languages"></select>
+    </div>
+    <div class="form-group">
+        @foreach (Group group in Model.allGroups)
+        {
+            <input type="checkbox" name="groups" value="@group.GroupId"
+
+                   @(Model.curGroups.Contains(Convert.ToString(group.GroupId)) ? "checked=\"checked\"" : "")
+                   
+                   /> @group.GroupName <br />
+        }
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>

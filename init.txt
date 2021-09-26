@@ -1,0 +1,8 @@
+DB_Server: localhost
+DB_User: root
+DB_Password: password
+DB_Name: diplomdb
+VM_IP: 127.1.1.1
+VM_Port: 2222
+VM_Name: yevhen
+VM_Password: W@rszawa2018

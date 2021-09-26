@@ -1,0 +1,21 @@
+﻿
+@using Microsoft.AspNetCore.Identity
+@using SPOJ.Models
+@model SPOJ.ViewModels.ApplicationListViewModel
+
+<h3>Accept users to group @Model.group.GroupName</h3>
+<h6>If you check student - you accept his application, if you uncheck student - you decline his application</h6>
+
+<form asp-action="ApplicationList" method="post">
+    <input type="hidden" name="GroupId" value="@Model.group.GroupId" />
+    <div class="form-group">
+        @foreach (User student in Model.appStudents)
+        {
+            <p><input type="checkbox" name="students" value="@student.Id"/> @student.firstName @student.lastName </p>
+        }
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+
+
+@* @(Model.appStudents.Contains(student.Id) ? "checked=\"checked\"" : "") *@

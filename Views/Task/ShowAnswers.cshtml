@@ -1,0 +1,27 @@
+﻿
+<div class="row">
+    <div class="mx-auto table-responsive">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">TaskID</th>
+                    <th scope="col">UserID</th>
+                    <th scope="col">answer</th>
+                </tr>
+            </thead>
+            <tbody>
+
+
+                @foreach (var answ in ViewBag.userTasks)
+                {
+
+                    <tr>
+                        <th style="width:3%" scope="row">@answ.TaskId</th>
+                        <td style="width:30%">@answ.UserId</td>
+                        <td style="width:67%"><textarea class="form-control">@answ.Answer</textarea> </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
